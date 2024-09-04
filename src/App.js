@@ -27,7 +27,7 @@ function TubeWithLiquid({ curve }) {
       roughness: { value: 0.13, min: 0, max: 1 },
       metalness: { value: 0.24, min: 0, max: 1 },
       transmission: { value: 1, min: 0, max: 1 },
-      color: "#cc00ff",
+      color: "#00b2ff",
     }
   );
 
@@ -46,7 +46,7 @@ function TubeWithLiquid({ curve }) {
     transmission: { value: 0, min: 0, max: 1 },
     ior: { value: 1.5, min: 1, max: 2.333 },
     anisotropy: { value: 0.5, min: 0, max: 1 },
-    color: "#00b2ff",
+    color: "#cc00ff",
   });
 
   useEffect(() => {
@@ -143,17 +143,6 @@ function App() {
     };
   }, []);
 
-  const [baseColor, normalMap, roughnessMap, metalnessMap, aoMap] = useLoader(
-    THREE.TextureLoader,
-    [
-      "/Metal_006_SD/Metal_006_basecolor.jpg",
-      "/Metal_006_SD/Metal_006_normal.jpg",
-      "/Metal_006_SD/Metal_006_roughness.jpg",
-      "/Metal_006_SD/Metal_006_metallic.jpg",
-      "/Metal_006_SD/Metal_006_ambientOcclusion.jpg",
-    ]
-  );
-
   const curves = [
     new THREE.CubicBezierCurve3(
       new THREE.Vector3(-2, 1.5, 0),
@@ -203,12 +192,12 @@ function App() {
             directionalLight.z,
           ]}
           intensity={5}
-          color={"#cc00ff"}
+          color={"#00b2ff"}
         />
         <directionalLight
           position={[0 + mousePosition.x * 0.1, 3 + mousePosition.y * 0.1, 2]}
           intensity={5}
-          color={"#cc00ff"}
+          color={"#00b2ff"}
         />
         {/* Plane with metal texture as background */}
         {/* <mesh position={[0, 0, -10]} rotation={[0, 0, -Math.PI / 2]}>

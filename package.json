@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "gh-pages": "^6.1.1",
     "gsap": "^3.12.5",
     "leva": "^0.9.35",
     "react": "^18.3.1",
@@ -21,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -29,6 +31,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "https://lyman60740.github.io/watercooling",
   "browserslist": {
     "production": [
       ">0.2%",
