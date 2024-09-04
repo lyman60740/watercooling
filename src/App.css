@@ -1,0 +1,17 @@
+.App {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #282c34;
+}
+
+.canvas {
+  width: 100%;
+  height: 100vh !important;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  /* filter: brightness(0.3); */
+}
