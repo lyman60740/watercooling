@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/watercooling/static/css/main.8e88217f.css",
-    "main.js": "/watercooling/static/js/main.182d8191.js",
+    "main.js": "/watercooling/static/js/main.80263568.js",
     "static/js/453.e48a149d.chunk.js": "/watercooling/static/js/453.e48a149d.chunk.js",
     "index.html": "/watercooling/index.html",
     "main.8e88217f.css.map": "/watercooling/static/css/main.8e88217f.css.map",
-    "main.182d8191.js.map": "/watercooling/static/js/main.182d8191.js.map",
+    "main.80263568.js.map": "/watercooling/static/js/main.80263568.js.map",
     "453.e48a149d.chunk.js.map": "/watercooling/static/js/453.e48a149d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8e88217f.css",
-    "static/js/main.182d8191.js"
+    "static/js/main.80263568.js"
   ]
 }
