@@ -10,6 +10,7 @@ import { useControls } from "leva";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as THREE from "three";
+import { TextureLoader } from "three";
 import "./App.css";
 
 // Enregistrer le plugin ScrollTrigger avec GSAP
@@ -19,6 +20,27 @@ function TubeWithLiquid({ curve }) {
   const tubeRef = useRef();
   const liquidRef = useRef();
   const progressRef = useRef(0);
+
+  const colorMap = useLoader(
+    TextureLoader,
+    "/Abstract_Organic_004_SD/Abstract_Organic_004_basecolor.jpg"
+  );
+  const displacementMap = useLoader(
+    TextureLoader,
+    "/Abstract_Organic_004_SD/Abstract_Organic_004_height.png"
+  );
+  const normalMap = useLoader(
+    TextureLoader,
+    "/Abstract_Organic_004_SD/Abstract_Organic_004_normal.jpg"
+  );
+  const aoMap = useLoader(
+    TextureLoader,
+    "/Abstract_Organic_004_SD/Abstract_Organic_004_ambientOcclusion.jpg"
+  );
+  const roughnessMap = useLoader(
+    TextureLoader,
+    "/Abstract_Organic_004_SD/Abstract_Organic_004_roughness.jpg"
+  );
 
   const { thickness, roughness, metalness, transmission, color } = useControls(
     "Tube Material",
@@ -62,9 +84,8 @@ function TubeWithLiquid({ curve }) {
       },
     });
 
-
-     // Cleanup function pour libérer les ressources
-     return () => {
+    // Cleanup function pour libérer les ressources
+    return () => {
       if (tubeRef.current) {
         tubeRef.current.geometry.dispose();
         tubeRef.current.material.dispose();
@@ -91,7 +112,7 @@ function TubeWithLiquid({ curve }) {
         20,
         false
       );
-      
+
       liquidRef.current.geometry.copy(newGeometry);
       newGeometry.dispose(); // Dispose de la nouvelle géométrie après l'avoir copiée
 
@@ -112,6 +133,12 @@ function TubeWithLiquid({ curve }) {
           metalness={metalness}
           transmission={transmission}
           color={color}
+          map={colorMap}
+          displacementMap={displacementMap}
+          displacementScale={0.2}
+          normalMap={normalMap}
+          aoMap={aoMap}
+          roughnessMap={roughnessMap}
         />
       </mesh>
 
@@ -198,7 +225,7 @@ function App() {
           near: 0.1,
           far: 1000,
         }}
-        gl={{ antialias: false, powerPreference: "high-performance", }}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
       >
         <Environment preset="studio" />
         <directionalLight
