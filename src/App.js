@@ -27,7 +27,7 @@ function TubeWithLiquid({ curve }) {
       roughness: { value: 0.13, min: 0, max: 1 },
       metalness: { value: 0.24, min: 0, max: 1 },
       transmission: { value: 1, min: 0, max: 1 },
-      color: "#00b2ff",
+      color: "#cc00ff",
     }
   );
 
@@ -46,7 +46,7 @@ function TubeWithLiquid({ curve }) {
     transmission: { value: 0, min: 0, max: 1 },
     ior: { value: 1.5, min: 1, max: 2.333 },
     anisotropy: { value: 0.5, min: 0, max: 1 },
-    color: "#cc00ff",
+    color: "#00b2ff",
   });
 
   useEffect(() => {
@@ -61,6 +61,19 @@ function TubeWithLiquid({ curve }) {
         scrub: 4, // Synchroniser avec le défilement
       },
     });
+
+
+     // Cleanup function pour libérer les ressources
+     return () => {
+      if (tubeRef.current) {
+        tubeRef.current.geometry.dispose();
+        tubeRef.current.material.dispose();
+      }
+      if (liquidRef.current) {
+        liquidRef.current.geometry.dispose();
+        liquidRef.current.material.dispose();
+      }
+    };
   }, []);
 
   useFrame(() => {
@@ -70,14 +83,17 @@ function TubeWithLiquid({ curve }) {
       .slice(0, Math.floor(1000 * progress));
 
     if (points.length > 1 && liquidRef.current) {
-      const tubeGeometry = new THREE.TubeGeometry(
+      // Mettre à jour la géométrie existante au lieu de créer une nouvelle
+      const newGeometry = new THREE.TubeGeometry(
         new THREE.CatmullRomCurve3(points),
         100,
         0.031,
         20,
         false
       );
-      liquidRef.current.geometry = tubeGeometry;
+      
+      liquidRef.current.geometry.copy(newGeometry);
+      newGeometry.dispose(); // Dispose de la nouvelle géométrie après l'avoir copiée
 
       // Mettre à jour l'opacité en fonction de la progression
       liquidRef.current.material.opacity = progress;
@@ -182,7 +198,7 @@ function App() {
           near: 0.1,
           far: 1000,
         }}
-        gl={{ antialias: false }}
+        gl={{ antialias: false, powerPreference: "high-performance", }}
       >
         <Environment preset="studio" />
         <directionalLight
@@ -192,12 +208,12 @@ function App() {
             directionalLight.z,
           ]}
           intensity={5}
-          color={"#00b2ff"}
+          color={"#cc00ff"}
         />
         <directionalLight
           position={[0 + mousePosition.x * 0.1, 3 + mousePosition.y * 0.1, 2]}
           intensity={5}
-          color={"#00b2ff"}
+          color={"#cc00ff"}
         />
         {/* Plane with metal texture as background */}
         {/* <mesh position={[0, 0, -10]} rotation={[0, 0, -Math.PI / 2]}>
